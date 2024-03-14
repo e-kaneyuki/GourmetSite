@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="StyleSheet" th:href="@{/css/layout/layout.css}">
+</head>
+<body>
+	<div layout:replace="~{layout/header::header}"></div>
+	<div layout:replace="~{layout/sidebar::sidebar}"></div>
+	<div layout:replace="~{layout/search-conditions::search-conditions}"></div>
+	<div layout:replace="~{list::main-content}"></div>
+<!--	<div layout:replace="~{home::main-content}"></div>-->
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div layout:fragment="sidebar" class="sidebar">
+    <!-- サイドメニューの内容 -->
+    <form th:action="@{/search}" method="post" th:object="${nameForm}">
+		<div th:if="${#fields.hasErrors()}" th:errors="${nameForm}"></div>
+        <div>
+            <label for="address">住所エリア：</label>
+            <input type="text" id="address" name="address"/>
+			<div>&nbsp;</div>
+        </div>
+        <div>
+            <label for="keyword">キーワード：</label>
+            <input type="text" id="keyword" name="keyword"/>
+			<div>&nbsp;</div>
+        </div>
+        <div>
+            <label for="order">並び順：</label>
+            <select name="order">
+				<option value="1">名前順</option>
+				<option value="4">おすすめ順</option>
+			</select>
+			<div>&nbsp;</div>
+        </div>
+<!--        <div>-->
+<!--        <label for="order">都道府県：</label>-->
+<!--	        <select>-->
+<!--	           <option th:each="area : ${apiResponse.results.largeArea}"-->
+<!--	            th:value="${area.code}"-->
+<!--	            th:text="${area.name}">Area Name</option>-->
+<!--	        </select>-->
+<!--        </div>-->
+        <div style="text-align: left;">
+            <input type="submit" value="送信"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

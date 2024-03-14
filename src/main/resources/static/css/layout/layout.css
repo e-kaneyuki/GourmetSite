@@ -1,0 +1,47 @@
+@charset "UTF-8";
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* ヘッダーの高さを指定 */
+    background-color: #f0f0f0;
+    padding: 10px 20px;
+    text-align: left;
+    z-index: 100;
+    box-sizing: border-box;
+    display: flex; /* Flexboxレイアウトを有効化 */
+    align-items: center; /* 中央揃えにする */
+/*    justify-content: space-around;  要素間に等間隔を設ける */
+}
+.sidebar {
+    position: fixed;
+    top: 100px; /* ヘッダーの高さに合わせてサイドメニューの開始位置を設定 */
+    right: 0;
+    width: 20%;
+    height: calc(100% - 100px); /* ヘッダーの下からページの下端まで */
+    background-color: #e0e0e0;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 100;
+    overflow-y: auto; /* コンテンツが多い場合はスクロール可能に */
+}
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.search-conditions {
+	position: fixed;
+    top: 100px; /* ヘッダーの高さに合わせてサイドメニューの開始位置を設定 */
+    right: 20%;
+    width: 80%;
+    height: 100px;
+    background-color: #e0e0e9;           
+}        
+.main-content {
+	margin-top: 200px; 
+    padding-top: 70px; /* ヘッダーの高さ+余白を考慮 */
+    padding-right: 20%; /* サイドメニューの幅を考慮 */
+    padding: 20px;
+}

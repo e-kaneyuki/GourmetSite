@@ -174,6 +174,9 @@ public class SampleController {
              JsonNode shopNode = shopsNode.get(i);
              String photoUrl = shopNode.get("photo").get("pc").get("l").asText();
              String name = shopNode.get("name").asText();
+             String nameKana = shopNode.get("name_kana").asText();
+             String middle_area_code = shopNode.get("middle_area").get("code").asText();
+             String middle_area_name = shopNode.get("middle_area").get("name").asText();
              String shopCatch = shopNode.get("catch").asText();
              String shopOpen = shopNode.get("open").asText();
              String shopAddress = shopNode.get("address").asText();
@@ -182,6 +185,9 @@ public class SampleController {
              LinkedHashMap<String, String> shopList = new LinkedHashMap<String, String>();
              
              shopList.put("店舗画像",photoUrl);
+             shopList.put("店舗名かな",nameKana);
+             shopList.put("中エリアコード",middle_area_code);
+             shopList.put("中エリア名",middle_area_name);
              shopList.put("店舗住所",shopAddress);
              shopList.put("店舗紹介",shopCatch);
              shopList.put("営業時間",shopOpen);

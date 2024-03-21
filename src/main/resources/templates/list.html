@@ -12,6 +12,7 @@
     <div style="width: 75%; padding: 20px;">
         <img src="https://imgfp.hotp.jp/SYS/fw_party/images/common/img_list_kv_720x99.png" alt="歓送迎会パーフェクトガイド" width="720" height="99">
         <h2>店舗一覧</h2>
+        <button onclick="location.href='/favorites/list/name'">お気に入りリスト</button>
         <h3 th:if="${zero}" th:text="${zero}">取得結果</h3>
         <div th:if="${shopMap != null}">
 		    <div th:each="shop, iterStat : ${shopMap.entrySet()}">
@@ -35,7 +36,7 @@
 			                <a th:href="${detail.value}" target="_blank" rel="noopener noreferrer">店舗URL</a>
 			            </div>
 			        </div>
-					<button type="submit" th:attr="data-form-id='form' + ${iterStat.index}" class="saveShopButton">お気に入り</button>
+					<button th:text="げんき" type="submit" th:attr="data-form-id='form' + ${iterStat.index}" class="saveShopButton">お気に入り</button>
         		</form>
 		    </div>
 		</div>

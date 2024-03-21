@@ -11,7 +11,10 @@
 			<span th:if="${shopMap != null}">&nbsp;|&nbsp;</span>
 			<span th:text="'キーワード:' + ${nameForm.keyword}"></span>
 			<span th:if="${shopMap != null}">&nbsp;|&nbsp;</span>
-			<span th:text="${nameForm.order != null and nameForm.order.equals('1') ? '並び順: 名前順' : '並び順: おすすめ順'}"></span>
+			<span th:if="${nameForm.order == 'エリア順'}" th:text="'並び順: エリア順'"></span>
+			<span th:if="${nameForm.order == '指定なし'}" th:text="'並び順: 指定なし'"></span>
+			<span th:if="${nameForm.order != '' and nameForm.order != 'エリア順' and nameForm.order != '指定なし'}" 
+				th:text="${nameForm.order != null and nameForm.order.equals('1') ? '並び順: 名前順' : '並び順: おすすめ順'}"></span>
 		</div>
 	</div>
 </body>

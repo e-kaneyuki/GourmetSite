@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,39 @@ public class FavoritesController {
 	@Autowired
 	StoreCrudRepository repository;
 	
-	@GetMapping("list")
-	public String getFavoritesList(Model model) {
-		Iterable<Store> storeList = repository.findAll();
-		model.addAttribute("store", storeList);
+	@GetMapping("list/name")
+	public String getFavoritesList(NameForm form, Model model) {
+		Iterable<Store> storeIte = repository.getAllNameAsc();
+		Map<String, Store> shopMap = new HashMap<>();
+		for (Store store : storeIte) {
+			System.out.println(store.getStoreName().toString());
+			
+			shopMap.put(store.getStoreName().toString(), store);
+		}
+		form.setAddress("なし");
+		form.setKeyword("なし");
+		form.setOrder("指定なし");
+		
+		model.addAttribute("shopMap", shopMap);
+		model.addAttribute("store", storeIte);
+		return "favorites-list";
+	}
+	
+	@GetMapping("list/areacode")
+	public String getFavoritesListAreaCode(NameForm form, Model model) {
+		Iterable<Store> storeIte = repository.getAllAreCodeAsc();
+		Map<String, Store> shopMap = new HashMap<>();
+		for (Store store : storeIte) {
+			System.out.println(store.getStoreName().toString());
+			
+			shopMap.put(store.getStoreName().toString(), store);
+		}
+		form.setAddress("なし");
+		form.setKeyword("なし");
+		form.setOrder("エリア順");
+		
+		model.addAttribute("shopMap", shopMap);
+		model.addAttribute("store", storeIte);
 		return "favorites-list";
 	}
 	

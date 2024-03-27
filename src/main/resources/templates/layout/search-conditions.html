@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
-	<div layout:fragment="search-conditions" class="search-conditions">
-		<div style="width: 75%; padding-left: 20px;">
+	<div layout:fragment="search-conditions" class="search-conditions" style="z-index: 1000;">
+		<div style="width: 75%; padding: 3px 20px;">
 			<p th:if="${shopMap == null }" th:text="'取得件数:0'"></p>
 		    <p th:if="${shopMap != null}" th:text="'取得件数：' + ${shopMap.size()}"></p>
 			<span th:text="'取得条件：'"></span>

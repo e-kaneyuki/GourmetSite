@@ -46,5 +46,13 @@ public class Store {
     
     @Column(name = "areaname")
     private String areaName;
+    
+    //経度
+    @Column(name = "longitude")
+    private String longitude;
+    
+    //緯度
+    @Column(name = "latitude")
+    private String latitude;
 
 }

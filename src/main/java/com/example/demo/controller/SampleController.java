@@ -3,6 +3,9 @@ package com.example.demo.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.form.NameForm;
 import com.example.demo.model.ApiResponse;
+import com.example.demo.model.StoreInfo;
 import com.example.demo.validator.CheckValidator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -38,6 +42,9 @@ public class SampleController {
 	
 	@Autowired
 	CheckValidator checkValidator;
+	@Autowired
+	MapController mapController;
+	
 	
 	@InitBinder("nameForm")
 	public void initBinder(WebDataBinder webDataBinder) {
@@ -92,13 +99,38 @@ public class SampleController {
         //Formに入力され得られたJson文字列をJsonNod化
         JsonNode shopsNode = changeJsonNode(formJsonStr);
         
+//        店名をリスト化
+        LinkedList<String> storeNameList = new LinkedList<String>();
+        List<StoreInfo> storeInfoList = new LinkedList<StoreInfo>();
+        
+        
         if(shopsNode.size()!=0) {
         	LinkedHashMap<String, LinkedHashMap<String, String>> shopMap = createMap(shopsNode);
+        	for (Entry<String, LinkedHashMap<String, String>> entry:shopMap.entrySet()) {
+        		StoreInfo store = new StoreInfo();
+        		store.setName(entry.getKey());
+//        		storeNameList.add(entry.getKey());
+        		
+        		//storeのNameから緯度経度を取得
+    			String[] coordinate = mapController.doGetLatLng(entry.getKey());
+    			//経度
+    			String longitude = coordinate[0];
+    			//緯度
+                String latitude = coordinate[1];
+                store.setLongitude(longitude);
+                store.setLatitude(latitude);       	
+        		
+        		storeInfoList.add(store);
+        	}
         	model.addAttribute("shopMap",shopMap);
         } else {
         	model.addAttribute("zero", "取得結果はゼロです。");
         }
+
         nameForm = setForm(nameForm);
+
+        model.addAttribute("storeInfoList",storeInfoList);
+//        System.out.println("storeInfoList"+storeInfoList);
 		return "list";
 	}
 	

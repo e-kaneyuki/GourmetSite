@@ -2,11 +2,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.saveShopButton').forEach(button => {
 		//クリックした時の関数を作成
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', function(event) {
 			//https://qiita.com/yokoto/items/27c56ebc4b818167ef9e
 			//e.preventDefaultメソッドを呼び出すことで、このデフォルトの動作をキャンセルしています。
 			//つまりhtmlに書いているbutton本来の処理を止める記載。
-            e.preventDefault();
+            event.preventDefault();
             
             // data-form-id属性からフォームのIDを取得
             var formId = this.getAttribute('data-form-id');

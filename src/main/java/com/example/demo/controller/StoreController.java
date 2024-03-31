@@ -14,6 +14,7 @@ import com.example.demo.repository.StoreCrudRepository;
 @RestController
 public class StoreController {
 
+
 	@Autowired
 	private StoreCrudRepository storeCrudRepository;
 	

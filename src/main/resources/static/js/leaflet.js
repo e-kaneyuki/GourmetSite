@@ -11,6 +11,7 @@ window.addEventListener("load", function() {
 		// 文字列から数値に変換
         var lat = parseFloat(latitude); 
         var lng = parseFloat(longitude); 
+        
 
         var map = L.map(e.id).setView([lat, lng], 15);
         

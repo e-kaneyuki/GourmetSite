@@ -46,6 +46,7 @@ public class SampleController {
 	MapController mapController;
 	
 	
+	
 	@InitBinder("nameForm")
 	public void initBinder(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(checkValidator);
@@ -59,7 +60,7 @@ public class SampleController {
 	//RequestParamをForm化したい
 	@PostMapping("search")
 	public String postName(@Validated NameForm nameForm, BindingResult bindingResult, Model model) throws IOException {
-		System.out.println(bindingResult);
+		
 
 		if(bindingResult.hasErrors()) {
 			nameForm = setForm(nameForm);
@@ -87,7 +88,7 @@ public class SampleController {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
             ApiResponse response = mapper.readValue(areaJsonStr, ApiResponse.class);
-            System.out.println("API Version: " + response);
+            
             model.addAttribute("apiResponse", response);
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +101,6 @@ public class SampleController {
         JsonNode shopsNode = changeJsonNode(formJsonStr);
         
 //        店名をリスト化
-        LinkedList<String> storeNameList = new LinkedList<String>();
         List<StoreInfo> storeInfoList = new LinkedList<StoreInfo>();
         
         
@@ -109,7 +109,7 @@ public class SampleController {
         	for (Entry<String, LinkedHashMap<String, String>> entry:shopMap.entrySet()) {
         		StoreInfo store = new StoreInfo();
         		store.setName(entry.getKey());
-//        		storeNameList.add(entry.getKey());
+
         		
         		//storeのNameから緯度経度を取得
     			String[] coordinate = mapController.doGetLatLng(entry.getKey());
@@ -119,9 +119,10 @@ public class SampleController {
                 String latitude = coordinate[1];
                 store.setLongitude(longitude);
                 store.setLatitude(latitude);       	
-        		
+
         		storeInfoList.add(store);
         	}
+        	//店名,店舗情報のMap
         	model.addAttribute("shopMap",shopMap);
         } else {
         	model.addAttribute("zero", "取得結果はゼロです。");
@@ -148,7 +149,7 @@ public class SampleController {
 		return form;
 	}
 
-	//urlを渡せばそれを実行し、JSON文字列で返す
+//	//urlを渡せばそれを実行し、JSON文字列で返す
 	public String doRequest(String doUrl) throws IOException  {
 		OkHttpClient client = new OkHttpClient();
 
@@ -173,7 +174,7 @@ public class SampleController {
                      "&address=" + address +
                      "&keyword=" + keyword +
                      "&order=" + order + 
-                     "&count=" + 20 +
+                     "&count=" + 50 +
                      "&format=json";
         
 		String areaUrl = "https://webservice.recruit.co.jp/hotpepper/large_area/v1/?key=" + apiKey +
@@ -195,7 +196,6 @@ public class SampleController {
         JsonNode rootNode = mapper.readTree(jsonStr);
         // 必要なデータの取得
         JsonNode shopsNode = rootNode.get("results").get("shop");
-        System.out.println("取得件数"+shopsNode.size());
         return shopsNode;
 	}
 	

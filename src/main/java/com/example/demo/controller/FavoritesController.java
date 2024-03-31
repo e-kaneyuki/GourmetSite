@@ -27,7 +27,7 @@ public class FavoritesController {
 		Iterable<Store> storeIte = repository.getAllNameAsc();
 		Map<String, Store> shopMap = new HashMap<>();
 		for (Store store : storeIte) {
-			System.out.println(store.getStoreName().toString());
+//			System.out.println(store.getStoreName().toString());
 			
 			shopMap.put(store.getStoreName().toString(), store);
 		}
@@ -74,7 +74,7 @@ public class FavoritesController {
 				store.setAreaCode(allParams.get("中エリアコード"));
 				store.setAreaName(allParams.get("中エリア名"));
 				repository.save(store);
-				System.out.println(allParams);
+//				System.out.println(allParams);
 		return "favorites-list";
 	}
 }

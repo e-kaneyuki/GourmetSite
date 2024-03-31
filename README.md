@@ -1,4 +1,5 @@
-##　利用する外部API
+## 利用する外部API
+当アプリケーションを使うには登録が必要
 - ホットペッパーAPI
 https://webservice.recruit.co.jp/doc/hotpepper/reference.html
 
